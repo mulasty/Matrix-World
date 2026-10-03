@@ -1,0 +1,71 @@
+/* MATRIX WORLD — derivative branding + localization chrome.
+   Kept isolated from upstream StarNet styles so upstream syncs remain reviewable. */
+
+.matrix-wordmark {
+  height: auto !important;
+  aspect-ratio: auto !important;
+  display: block;
+  background: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  color: var(--ph);
+  font-family: inherit;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  text-shadow: 0 0 8px var(--ph-glow2);
+}
+
+.matrix-splash-wordmark {
+  width: min(78vw, 900px);
+  color: var(--ph-bright);
+  font-family: inherit;
+  font-size: clamp(54px, 9vw, 132px);
+  font-weight: 700;
+  line-height: .86;
+  letter-spacing: .12em;
+  text-align: center;
+  text-indent: .12em;
+  user-select: none;
+}
+
+.mw-language {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 68%;
+  padding: 0 10px;
+  border-left: 1px solid var(--ph-faint);
+  color: var(--ph-dim);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.mw-language button {
+  appearance: none;
+  border: 0;
+  padding: 2px 3px;
+  background: transparent;
+  color: var(--ph-dim);
+  font: inherit;
+  cursor: pointer;
+  text-shadow: none;
+}
+
+.mw-language button:hover,
+.mw-language button:focus-visible,
+.mw-language button.active {
+  color: var(--ph-bright);
+  text-shadow: 0 0 7px var(--ph-glow2);
+  outline: none;
+}
+
+.mw-language button.active {
+  border-bottom: 1px solid currentColor;
+}
+
+@media (max-width: 1180px) {
+  .mw-language { display: none; }
+  .matrix-wordmark { font-size: 24px; letter-spacing: 3px; }
+}
