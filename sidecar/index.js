@@ -131,7 +131,11 @@ const { makeEmitter } = require('../shared/emitter.js');
 const { redact, renderRecall, injectRecall, rank, makeContext, compactionMemoryBlock, compactionSummaryPrompt } = require('./context.js');
 const { makeSummarizer } = require('./compaction-summarizer.js');   // chunked context-compaction fold (Lane A)
 const { runRouteFailure } = require('./runroute.js');   // a failure escaping handleRun must never read as an empty 200
-const { json: respondJson, readJsonBody, isAgentId } = require('./respond.js');   // canonical json()/body/agent-id helpers — adopt incrementally, don't mass-migrate
+const { json: respondJson, readJsonBody, isAgentId } = require('./respond.js');
+const { makeMatrixAgentOsClient } = require('./matrix/client.js');   // MATRIX Agent OS read plane
+const { makeMatrixRouteHandlers } = require('./matrix/routes.js');   // browser-safe /api/matrix/* proxy
+const matrixAgentOsClient = makeMatrixAgentOsClient({ env: process.env });
+const matrixAgentOsRoutes = makeMatrixRouteHandlers({ client: matrixAgentOsClient, respondJson });   // canonical json()/body/agent-id helpers — adopt incrementally, don't mass-migrate
 const { readBody, readBodyBuffer } = require('./http-body.js');
 const { MIME, CHANNEL_UPLOAD_MAX_BYTES, mimeForPath, safeDownloadName, isActiveDeliverable, parseRange } = require('./file-response.js');
 const { reflect, reflectSalient, recordFromProposal, feedbackFor, highStakes } = require('./reflect.js');
@@ -8387,6 +8391,9 @@ const ROUTES = [
   { m: 'POST', exact: '/api/cancel', h: handleCancel },
   { m: 'POST', exact: '/api/run/steer', h: handleRunSteer },
   { m: 'GET', exact: '/api/version', h: handleVersion },
+  { m: 'GET', exact: '/api/matrix/health', h: matrixAgentOsRoutes.health },   // MATRIX Agent OS connectivity/readiness
+  { m: 'GET', qsplit: '/api/matrix/snapshot', h: matrixAgentOsRoutes.snapshot },   // Event Protocol 3.0 projection
+  { m: 'GET', qsplit: '/api/matrix/events', h: matrixAgentOsRoutes.events },   // filtered Event Protocol history
   { m: 'GET', exact: '/api/diagnostics', h: handleDiagnostics },   // T3.9 paste-ready bug report
   { m: 'POST', exact: '/api/diagnostics/live', h: handleLiveDoctor }, // opt-in live model/execution/MCP/channel proof
   { m: 'POST', exact: '/api/halt', h: handleHalt },

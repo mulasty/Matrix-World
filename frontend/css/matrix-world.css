@@ -1,0 +1,131 @@
+/* MATRIX WORLD — derivative branding + localization chrome.
+   Kept isolated from upstream StarNet styles so upstream syncs remain reviewable. */
+
+.matrix-wordmark {
+  height: auto !important;
+  aspect-ratio: auto !important;
+  display: block;
+  background: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  color: var(--ph);
+  font-family: inherit;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 4px;
+  white-space: nowrap;
+  text-shadow: 0 0 8px var(--ph-glow2);
+}
+
+.matrix-splash-wordmark {
+  width: min(78vw, 900px);
+  color: var(--ph-bright);
+  font-family: inherit;
+  font-size: clamp(54px, 9vw, 132px);
+  font-weight: 700;
+  line-height: .86;
+  letter-spacing: .12em;
+  text-align: center;
+  text-indent: .12em;
+  user-select: none;
+}
+
+.mw-language {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 68%;
+  padding: 0 10px;
+  border-left: 1px solid var(--ph-faint);
+  color: var(--ph-dim);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.mw-language button {
+  appearance: none;
+  border: 0;
+  padding: 2px 3px;
+  background: transparent;
+  color: var(--ph-dim);
+  font: inherit;
+  cursor: pointer;
+  text-shadow: none;
+}
+
+.mw-language button:hover,
+.mw-language button:focus-visible,
+.mw-language button.active {
+  color: var(--ph-bright);
+  text-shadow: 0 0 7px var(--ph-glow2);
+  outline: none;
+}
+
+.mw-language button.active {
+  border-bottom: 1px solid currentColor;
+}
+
+@media (max-width: 1180px) {
+  .mw-language { display: none; }
+  .matrix-wordmark { font-size: 24px; letter-spacing: 3px; }
+}
+
+
+.mw-agent-os-status {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 68%;
+  padding: 0 10px;
+  border: 0;
+  border-left: 1px solid var(--ph-faint);
+  background: transparent;
+  color: var(--ph-dim);
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.mw-agent-os-status:hover,
+.mw-agent-os-status:focus-visible {
+  color: var(--ph-bright);
+  outline: none;
+  text-shadow: 0 0 7px var(--ph-glow2);
+}
+
+.mw-aos-dot {
+  width: 7px;
+  height: 7px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 transparent;
+}
+
+.mw-agent-os-status.is-online { color: var(--ph); }
+.mw-agent-os-status.is-online .mw-aos-dot {
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.mw-agent-os-status.is-warning { color: var(--ph-bright); }
+.mw-agent-os-status.is-warning .mw-aos-dot {
+  background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+  animation: mw-aos-pulse 1.4s steps(2, end) infinite;
+}
+
+.mw-agent-os-status.is-offline { opacity: .58; }
+
+@keyframes mw-aos-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .35; }
+}
+
+@media (max-width: 1360px) {
+  .mw-agent-os-status .mw-aos-label { display: none; }
+  .mw-agent-os-status { padding-inline: 8px; }
+}
