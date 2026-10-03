@@ -612,6 +612,7 @@ test/channels.buttons.test.js
 test/channels.sse.test.js
 test/matrix-agent-os-client.test.js
 test/matrix-agent-os-routes.test.js
+test/matrix-agent-os-ui.test.js
 test/mcp.client.test.js
 test/mcp.resources-prompts.test.js
 test/mcp.transport.test.js
